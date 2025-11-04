@@ -1,0 +1,24 @@
+# Enables the URL rewriting engine
+RewriteEngine On
+
+# ----------------------------------------------------------------------
+# RULE 1: Redirect direct requests for "index.html" to the root "/"
+# This enforces a clean homepage URL.
+# ----------------------------------------------------------------------
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ / [R=301,L]
+
+# ----------------------------------------------------------------------
+# RULE 2: Redirect requests for "file.html" to just "file"
+# This enforces clean URLs for all other pages.
+# ----------------------------------------------------------------------
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)\.html\ HTTP/
+RewriteRule ^([^/]+)\.html$ /$1 [R=301,L]
+
+# ----------------------------------------------------------------------
+# RULE 3: Silently rewrite "file" to "file.html" on the server
+# This is the internal rule that makes the clean URLs work.
+# ----------------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
