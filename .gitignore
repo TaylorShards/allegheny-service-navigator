@@ -11,6 +11,13 @@
 /wiki/temp/
 /wiki/logs/
 /wiki/mw-config/
+/wiki/extensions/
+
+# EXCEPTION: We are intentionally tracking our chosen skin's source
+# code and dependencies as part of this project's theme.
+# ===================================================================
+# the modified skin should be in version contro
+!/wiki/skins/Vector-2022/
 
 # ===================================================================
 # B. Dependencies (PHP/JS)
